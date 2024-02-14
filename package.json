@@ -1,0 +1,22 @@
+{
+  "name": "airbnb_clone",
+  "version": "1.0.0",
+  "description": "This  is the clone of famous website airbnb to practice MERN Stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamzamehmood67/AirBnB_Clone.git"
+  },
+  "author": "HamzaMehmood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamzamehmood67/AirBnB_Clone/issues"
+  },
+  "homepage": "https://github.com/hamzamehmood67/AirBnB_Clone#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
