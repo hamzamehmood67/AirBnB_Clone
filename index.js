@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const Listing = require("./models/listing");
 const app = express();
 
 async function main() {
@@ -9,8 +9,22 @@ async function main() {
 }
 
 main().catch((err) => console.log(err));
+
 app.get("/", (req, res) => {
   res.send("Runing");
+});
+
+app.get("/testL", async (req, res) => {
+  let newList = new Listing({
+    title: "AKhuwat College Kasur",
+    description: "BSIT & BSECO",
+    price: 15999,
+    location: "Kasur Punjab",
+    country: "Pakistan",
+  });
+
+  await newList.save();
+  res.send("Data Save");
 });
 
 app.listen(8080, () => {
