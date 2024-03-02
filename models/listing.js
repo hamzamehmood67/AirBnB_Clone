@@ -11,7 +11,7 @@ const listingSchema = new mongoose.Schema({
     type: Number,
   },
   image: {
-    type: String,
+    type: Object,
     default:
       "https://www.istockphoto.com/photo/luxurious-villa-with-pool-gm506903162-84462663",
   },
