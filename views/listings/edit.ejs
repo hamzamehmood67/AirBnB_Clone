@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit</title>
+  </head>
+  <body>
+    <h1>Edit your post</h1>
+    <form action="/listings/<%= list.id %>?_method=PUT" method="post">
+      <input type="text" value="<%= list.title %>" name="lisitng[title]" />
+      <br />
+      <input
+        type="text"
+        value="<%= list.description %>"
+        name="lisitng[description]"
+      />
+      <br />
+      <input type="text" value="<%= list.image %>" name="lisitng[image]" />
+      <br />
+      <input type="text" value="<%= list.price %>" name="lisitng[price]" />
+      <br />
+      <input
+        type="text"
+        value="<%= list.location %>"
+        name="lisitng[location]"
+      />
+      <br />
+      <input type="text" value="<%= list.country %>" name="lisitng[country]" />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
