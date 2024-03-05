@@ -1,0 +1,41 @@
+.fa-compass {
+  color: royalblue;
+}
+
+.nav-link {
+  color: black !important;
+}
+
+.navbar {
+  background-color: white;
+}
+
+footer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+}
+
+.f-icon {
+  /* Add styling for your icon here */
+  font-size: 20px;
+}
+
+.f-brand {
+  font-size: 14px;
+  color: #333;
+}
+
+.f-links {
+  margin-top: 10px;
+}
+
+.f-links a {
+  color: #666;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.f-links a:hover {
+  color: #000;
+}
