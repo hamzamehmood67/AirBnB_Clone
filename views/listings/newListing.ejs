@@ -1,23 +1,76 @@
 <% layout(`/layout/basic`) %>
-<body>
-  <h1>Create New Lisitng</h1>
-  <form action="/listings" method="post">
-    <input type="text" placeholder="title" name="lisitng[title]" />
-    <br />
-    <input
-      type="text"
-      placeholder="Enter description"
-      name="lisitng[description]"
-    />
-    <br />
-    <input type="text" placeholder="image url" name="lisitng[image]" />
-    <br />
-    <input type="text" placeholder="price" name="lisitng[price]" />
-    <br />
-    <input type="text" placeholder="location" name="lisitng[location]" />
-    <br />
-    <input type="text" placeholder="Country" name="lisitng[country]" />
-    <br />
-    <button type="submit">Submit</button>
-  </form>
-</body>
+<div class="row">
+  <div class="col-6">
+    <h3>Create New Lisitng</h3>
+    <form action="/listings" method="post" class="addNewForm">
+      <div class="mb-3">
+        <label for="title" class="form-label">Enter the Name</label>
+        <input
+          type="text"
+          placeholder="Enter name of Listing"
+          name="lisitng[title]"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Enter Description</label>
+        <input
+          type="text"
+          placeholder="Enter description"
+          name="lisitng[description]"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Enter image URL</label>
+        <input
+          type="text"
+          placeholder="image url"
+          name="lisitng[image]"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Enter Price</label>
+          <input
+            type="number"
+            placeholder="price"
+            name="lisitng[price]"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">Enter Country</label>
+          <input
+            type="text"
+            placeholder="Country"
+            name="lisitng[country]"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Enter Location</label>
+        <input
+          type="text"
+          placeholder="location"
+          name="lisitng[location]"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-dark addBtn">Add</button>
+    </form>
+  </div>
+</div>

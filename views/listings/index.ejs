@@ -1,12 +1,30 @@
 <% layout(`/layout/basic`) %>
+
 <body>
-  <h1>All Listings</h1>
-  <form action="/listings/new" method="get">
-    <button>Create new Listing</button>
-  </form>
-  <ul>
+  <h3>All Listings</h3>
+  <div class="row">
     <% for(list of allListings){ %>
-    <li><a href="/listings/<%= list._id %>"><%= list.title %></a></li>
+
+    <div
+      class="card row-cols.lg-3 row-cols.md-3 row-cols.sm-2"
+      style="width: 20rem"
+    >
+      <a href="/listings/<%= list._id %>">
+        <img
+          src="<%= list.image.url %>"
+          class="card-img-top"
+          alt="listing image"
+        />
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+          <p class="card-text">
+            <b> <%= list.title %> </b> <br />
+            &#8377;<%= list.price.toLocaleString("en-IN") %>/night
+          </p>
+        </div></a
+      >
+    </div>
+
     <% } %>
-  </ul>
+  </div>
 </body>
