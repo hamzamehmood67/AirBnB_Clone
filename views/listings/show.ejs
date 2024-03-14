@@ -1,14 +1,34 @@
 <% layout(`/layout/basic`) %>
-<body>
-  <h1>Show ejs</h1>
-  <li><%=list.title %></li>
-  <li>&#8377;<%= list.price.toLocaleString("en-IN") %></li>
-  <li><%= list.description %></li>
-  <li><%= list.location %></li>
-  <li><%= list.country %></li>
-  <a href="/listings/<%=list.id  %>/edit">Edit this post</a>
-  <br /><br />
+
+<div class="row">
+  <div class="col-6 offset-4">
+    <h1>Show ejs</h1>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <img
+        src="<%= list.image.url %>"
+        class="card-img-top"
+        alt="listing image"
+      />
+      <div class="card-body">
+        <p class="card-text">
+          <b><%= list.title %></b> <br />
+
+          <%= list.description %> <br />
+          &#8377;<%= list.price.toLocaleString("en-IN") %> <br />
+          <%= list.location %> <br />
+          <%= list.country %> <br />
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="btns">
+  <a href="/listings/<%=list.id  %>/edit" class="btn editBtn">Edit this post</a>
+
   <form action="/listings/<%= list.id %>?_method=DELETE" method="post">
-    <button>Delete this Post</button>
+    <button class="btn btn-dark">Delete this Post</button>
   </form>
-</body>
+</div>

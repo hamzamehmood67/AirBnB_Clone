@@ -79,4 +79,12 @@ footer {
   background-color: royalblue !important;
   border: none !important;
   padding: 0.6rem 1rem !important;
+  color: white !important;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 1rem;
 }
