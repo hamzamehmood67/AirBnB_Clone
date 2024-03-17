@@ -2,7 +2,12 @@
 <div class="row">
   <div class="col-6">
     <h3>Create New Lisitng</h3>
-    <form action="/listings" method="post" class="addNewForm">
+    <form
+      action="/listings"
+      method="post"
+      class="addNewForm needs-validation"
+      novalidate
+    >
       <div class="mb-3">
         <label for="title" class="form-label">Enter the Name</label>
         <input
@@ -12,6 +17,7 @@
           class="form-control"
           required
         />
+        <div class="invalid-feedback">Invalid Name</div>
       </div>
 
       <div class="mb-3">
@@ -23,6 +29,7 @@
           class="form-control"
           required
         />
+        <div class="invalid-feedback">Invalid Description</div>
       </div>
 
       <div class="mb-3">
@@ -34,17 +41,18 @@
           class="form-control"
           required
         />
+        <div class="invalid-feedback">Invalid Image link</div>
       </div>
       <div class="row">
         <div class="mb-3 col-md-4">
           <label for="price" class="form-label">Enter Price</label>
           <input
-            type="number"
             placeholder="price"
             name="lisitng[price]"
             class="form-control"
             required
           />
+          <div class="invalid-feedback">Invalid Price</div>
         </div>
 
         <div class="mb-3 col-md-8">
@@ -56,6 +64,7 @@
             class="form-control"
             required
           />
+          <div class="invalid-feedback">Invalid Country Name</div>
         </div>
       </div>
 
@@ -68,6 +77,7 @@
           class="form-control"
           required
         />
+        <div class="invalid-feedback">Invalid Location</div>
       </div>
 
       <button type="submit" class="btn btn-dark addBtn">Add</button>
