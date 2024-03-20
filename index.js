@@ -6,6 +6,8 @@ const methodOverride = require(`method-override`); //to send put post patch requ
 const ejsMate = require(`ejs-mate`); //To make layouts boilerplate in ejs
 const wrapAsync = require(`./utils/wrapAsync.js`); //to handle custom errors...
 const ExpressError = require(`./utils/ExpressError.js`); //to handle custom errors...
+const Joi = require('joi'); //to valide data from user
+const listingSchema = require(`./schema.js`);
 const app = express();
 
 app.set(`view engine`, `ejs`);
@@ -24,6 +26,22 @@ main().catch((err) => console.log(err));
 app.get("/", (req, res) => {
   res.send("Runing");
 });
+
+//Middleware
+const validateListings = (req, res, next) => {
+  let { error } = listingSchema.validate(req.body);
+  console.log(error);
+  if (error)
+    throw new ExpressError(400, error);
+  else
+    return next();
+}
+
+
+
+
+
+
 
 app.get(
   `/listings`,
@@ -48,10 +66,10 @@ app.get(
 );
 
 app.post(
-  `/listings`,
+  `/listings`, validateListings,
   wrapAsync(async (req, res) => {
-    if (!req.body.lisitng)
-      throw new ExpressError(400, `Listing Object is not found`); // If req send from postman and body has no listing
+
+
     let listing = req.body.lisitng;
     let newlisting = new Listing(listing);
     await newlisting.save();
@@ -70,7 +88,7 @@ app.get(
 );
 
 app.put(
-  `/listings/:id`,
+  `/listings/:id`, validateListings,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.lisitng });
@@ -87,7 +105,7 @@ app.delete(
   })
 );
 app.all(`*`, (req, res, next) => {
-  next(new ExpressError(`404`, `Page Not found`));
+  next(new ExpressError(404, `Page Not found`));
 });
 
 app.use((err, req, res, next) => {

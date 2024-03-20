@@ -1,86 +1,47 @@
 <% layout(`/layout/basic`) %>
-<div class="row">
-  <div class="col-6">
-    <h3>Create New Lisitng</h3>
-    <form
-      action="/listings"
-      method="post"
-      class="addNewForm needs-validation"
-      novalidate
-    >
-      <div class="mb-3">
-        <label for="title" class="form-label">Enter the Name</label>
-        <input
-          type="text"
-          placeholder="Enter name of Listing"
-          name="lisitng[title]"
-          class="form-control"
-          required
-        />
-        <div class="invalid-feedback">Invalid Name</div>
-      </div>
-
-      <div class="mb-3">
-        <label for="description" class="form-label">Enter Description</label>
-        <input
-          type="text"
-          placeholder="Enter description"
-          name="lisitng[description]"
-          class="form-control"
-          required
-        />
-        <div class="invalid-feedback">Invalid Description</div>
-      </div>
-
-      <div class="mb-3">
-        <label for="image" class="form-label">Enter image URL</label>
-        <input
-          type="text"
-          placeholder="image url"
-          name="lisitng[image]"
-          class="form-control"
-          required
-        />
-        <div class="invalid-feedback">Invalid Image link</div>
-      </div>
-      <div class="row">
-        <div class="mb-3 col-md-4">
-          <label for="price" class="form-label">Enter Price</label>
-          <input
-            placeholder="price"
-            name="lisitng[price]"
-            class="form-control"
-            required
-          />
-          <div class="invalid-feedback">Invalid Price</div>
+  <div class="row">
+    <div class="col-6">
+      <h3>Create New Lisitng</h3>
+      <form action="/listings" method="post" class="addNewForm needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="title" class="form-label">Enter the Name</label>
+          <input type="text" placeholder="Enter name of Listing" name="lisitng[title]" class="form-control" required />
+          <div class="invalid-feedback">Invalid Name</div>
         </div>
 
-        <div class="mb-3 col-md-8">
-          <label for="country" class="form-label">Enter Country</label>
-          <input
-            type="text"
-            placeholder="Country"
-            name="lisitng[country]"
-            class="form-control"
-            required
-          />
-          <div class="invalid-feedback">Invalid Country Name</div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Enter Description</label>
+          <input type="text" placeholder="Enter description" name="lisitng[description]" class="form-control"
+            required />
+          <div class="invalid-feedback">Invalid Description</div>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <label for="location" class="form-label">Enter Location</label>
-        <input
-          type="text"
-          placeholder="location"
-          name="lisitng[location]"
-          class="form-control"
-          required
-        />
-        <div class="invalid-feedback">Invalid Location</div>
-      </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Enter image URL</label>
+          <input type="text" placeholder="image url" name="lisitng[image]" class="form-control" required />
+          <div class="invalid-feedback">Invalid Image link</div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Enter Price</label>
+            <input placeholder="price" name="lisitng[price]" class="form-control" required />
+            <div class="invalid-feedback">Invalid Price</div>
+          </div>
 
-      <button type="submit" class="btn btn-dark addBtn">Add</button>
-    </form>
+          <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Enter Country</label>
+            <input type="text" placeholder="Country" name="lisitng[country]" class="form-control" required />
+            <div class="invalid-feedback">Invalid Country Name</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Enter Location</label>
+          <input type="text" placeholder="location" name="lisitng[location]" class="form-control" required />
+          <div class="invalid-feedback">Invalid Location</div>
+        </div>
+
+        <button type="submit" class="btn btn-dark addBtn">Add</button>
+      </form>
+    </div>
   </div>
-</div>

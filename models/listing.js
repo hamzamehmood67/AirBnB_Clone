@@ -1,3 +1,4 @@
+const { string, object } = require("joi");
 const mongoose = require("mongoose");
 
 const listingSchema = new mongoose.Schema({
