@@ -7,7 +7,8 @@ const ejsMate = require(`ejs-mate`); //To make layouts boilerplate in ejs
 const wrapAsync = require(`./utils/wrapAsync.js`); //to handle custom errors...
 const ExpressError = require(`./utils/ExpressError.js`); //to handle custom errors...
 const Joi = require('joi'); //to valide data from user
-const listingSchema = require(`./schema.js`);
+const { listingSchema, reviewSchema } = require(`./schema.js`); ///to validate data by joi 
+const review = require(`./models/review.js`);
 const app = express();
 
 app.set(`view engine`, `ejs`);
@@ -36,11 +37,14 @@ const validateListings = (req, res, next) => {
   else
     return next();
 }
-
-
-
-
-
+const validateReview = (req, res, next) => {
+  let { error } = reviewSchema.validate(req.body);
+  console.log(error);
+  if (error)
+    throw new ExpressError(400, error);
+  else
+    return next();
+}
 
 
 app.get(
@@ -104,6 +108,20 @@ app.delete(
     res.redirect(`/listings`);
   })
 );
+
+app.post('/listings/:id/review', validateReview, wrapAsync(async (req, res) => {
+  let listing = await Listing.findById(req.params.id);
+  console.log(req.body.review);
+  let newReview = new review(req.body.review);
+
+  listing.reviews.push(newReview);
+  await newReview.save();
+  await listing.save();
+
+  console.log("New review save");
+  res.redirect(`/listings/${req.params.id}`)
+
+}));
 app.all(`*`, (req, res, next) => {
   next(new ExpressError(404, `Page Not found`));
 });
