@@ -1,6 +1,7 @@
 .fa-compass {
   color: royalblue;
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -10,6 +11,7 @@ body {
 .container {
   flex: 1;
 }
+
 .nav-link {
   color: black !important;
 }
@@ -52,6 +54,7 @@ footer {
   border: none !important;
   margin-bottom: 2rem;
 }
+
 .row {
   justify-content: center;
 }
@@ -60,6 +63,7 @@ footer {
   text-decoration: none !important;
   color: #000;
 }
+
 .card-img-top {
   border-radius: 1rem !important;
   height: 20rem;
@@ -87,4 +91,9 @@ footer {
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 1rem;
+}
+
+
+.review-card {
+  border: 1px dashed royalblue !important;
 }

@@ -63,7 +63,7 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate('reviews');
 
     res.render("./listings/show.ejs", { list: listing });
   })
@@ -108,7 +108,7 @@ app.delete(
     res.redirect(`/listings`);
   })
 );
-
+//reviewss
 app.post('/listings/:id/review', validateReview, wrapAsync(async (req, res) => {
   let listing = await Listing.findById(req.params.id);
   console.log(req.body.review);
@@ -122,6 +122,15 @@ app.post('/listings/:id/review', validateReview, wrapAsync(async (req, res) => {
   res.redirect(`/listings/${req.params.id}`)
 
 }));
+
+app.delete('/listings/:id/review/:reviewId', wrapAsync(async (req, res) => {
+  let { id, reviewId } = req.params;
+  await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+  await review.findByIdAndDelete(reviewId);
+
+  res.redirect(`/listings/${id}`)
+}))
+
 app.all(`*`, (req, res, next) => {
   next(new ExpressError(404, `Page Not found`));
 });
