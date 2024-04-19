@@ -47,6 +47,7 @@ router.post(
         let listing = req.body.lisitng;
         let newlisting = new Listing(listing);
         await newlisting.save();
+        req.flash('succes', 'New Place is added successfully')
         res.redirect(`/listings`);
     })
 );

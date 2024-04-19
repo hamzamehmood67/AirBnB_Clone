@@ -5,7 +5,8 @@ const path = require(`path`); //to join path of static files
 const methodOverride = require(`method-override`); //to send put post patch request from form
 const ejsMate = require(`ejs-mate`); //To make layouts boilerplate in ejs
 const ExpressError = require(`./utils/ExpressError.js`); //to handle custom errors...
-const session = require(`express-session`);
+const session = require(`express-session`);  //for maintaining session for the website
+const flash = require(`connect-flash`);
 
 const app = express();
 
@@ -20,7 +21,17 @@ const sessionOptions={
   }
 }
 
+app.get("/", (req, res) => {
+  res.send("Runing");
+});
+
 app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req, res, next)=>{
+  res.locals.succes= req.flash("succes");
+  next();
+})
 const listings = require("./routes/listings.js");
 const review = require("./routes/review.js");
 
@@ -38,9 +49,7 @@ async function main() {
 }
 main().catch((err) => console.log(err));
 
-app.get("/", (req, res) => {
-  res.send("Runing");
-});
+
 
 
 app.use("/listings", listings);
