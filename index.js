@@ -30,6 +30,7 @@ app.use(flash());
 
 app.use((req, res, next)=>{
   res.locals.succes= req.flash("succes");
+  res.locals.error= req.flash("error");
   next();
 })
 const listings = require("./routes/listings.js");
