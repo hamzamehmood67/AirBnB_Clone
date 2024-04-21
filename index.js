@@ -13,6 +13,7 @@ const User = require(`./models/user.js`);
 
 const listings = require("./routes/listings.js");
 const review = require("./routes/review.js");
+const userRoute = require("./routes/user.js");
 
 const app = express();
 
@@ -62,7 +63,7 @@ main().catch((err) => console.log(err));
 
 app.use("/listings", listings);
 app.use("/listings/:id/review", review);
-
+app.use("/", userRoute);
 //route to store fake user
 app.get(`/fakeuser`, async (req, res) => {
   let fake = new User({
