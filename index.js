@@ -45,6 +45,7 @@ passport.deserializeUser(User.deserializeUser()); //It terminate everything when
 app.use((req, res, next) => {
   res.locals.succes = req.flash("succes");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 });
 
