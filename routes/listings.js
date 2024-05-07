@@ -2,7 +2,7 @@ const Listing = require("../models/listing"); // Database models
 const wrapAsync = require(`../utils/wrapAsync.js`); //to handle custom errors...
 const ExpressError = require(`../utils/ExpressError.js`); //to handle custom errors...
 const { listingSchema } = require(`../schema.js`); ///to validate data by joi
-const { isValid } = require(`../middlewares.js`);
+const { isValid, isOwner } = require(`../middlewares.js`);
 const express = require("express");
 const router = express.Router();
 
@@ -32,6 +32,7 @@ router.get(
     const listing = await Listing.findById(id)
       .populate("reviews")
       .populate("owner");
+ 
     if (!listing) {
       req.flash("error", "Lisiting you requested for does not exist");
       res.redirect("/listings");
@@ -56,7 +57,7 @@ router.post(
 );
 
 router.get(
-  `/:id/edit`,
+  `/:id/edit`, isOwner,
   isValid,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
@@ -65,15 +66,18 @@ router.get(
       req.flash("error", "Lisiting you requested for does not exist");
       res.redirect("/listings");
     }
+   
+    
     res.render(`./listings/edit.ejs`, { list: list });
   })
 );
 
 router.put(
-  `/:id`,
-  validateListings,
+  `/:id`, isOwner,
+  validateListings, 
   wrapAsync(async (req, res) => {
     let { id } = req.params;
+    
     await Listing.findByIdAndUpdate(id, { ...req.body.lisitng });
     req.flash("succes", "Listing is Updated");
     res.redirect(`/listings/${id}`);
@@ -82,6 +86,7 @@ router.put(
 
 router.delete(
   `/:id`,
+  isOwner,
   isValid,
   wrapAsync(async (req, res) => {
     let { id } = req.params;

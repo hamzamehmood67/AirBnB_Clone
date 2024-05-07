@@ -1,3 +1,5 @@
+
+const Listing= require("./models/listing")
 const isValid = (req, res, next) => {
   if (req.isAuthenticated()) return next();
   else {
@@ -18,4 +20,15 @@ const saveRedirectUrl = (req, res, next) => {
 
   return next();
 };
-module.exports = { isValid, saveRedirectUrl };
+
+const isOwner= async(req, res, next)=>{
+  let { id } = req.params;
+    let list=await Listing.findById(id);
+    if(!res.locals.currUser._id.equals(list.owner._id))
+    {
+      req.flash("error", "You are not allowed to access this")
+      return res.redirect(`/listings/${id}`);
+    }
+    next();
+}
+module.exports = { isValid, saveRedirectUrl, isOwner };

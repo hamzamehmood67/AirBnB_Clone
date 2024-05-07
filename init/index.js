@@ -13,7 +13,7 @@ const init = async () => {
   await listings.deleteMany({});
   data.data = data.data.map((obj) => ({
     ...obj,
-    owner: "66328fd5b097d2577e0a64e9",
+    owner: "6638d2183f4eed2c84eca3af",
   }));
 
   await listings.insertMany(data.data);
