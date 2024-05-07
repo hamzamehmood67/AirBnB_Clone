@@ -44,6 +44,7 @@ router.post(
     req.flash(`succes`, `Welcom to AirBnb`);
     //this is bcz when we login from home page it gives page not found
     //bcz when user login form home isValid middleware is not triggered
+    console.log(res.locals.redirectUrl)
     let redirectURL = res.locals.redirectUrl || `/listings`;
     res.redirect(redirectURL);
   })

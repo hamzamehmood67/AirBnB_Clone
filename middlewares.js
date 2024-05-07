@@ -1,5 +1,6 @@
 
 const Listing= require("./models/listing")
+const Review= require("./models/review")
 const isValid = (req, res, next) => {
   if (req.isAuthenticated()) return next();
   else {
@@ -31,4 +32,14 @@ const isOwner= async(req, res, next)=>{
     }
     next();
 }
-module.exports = { isValid, saveRedirectUrl, isOwner };
+const isReviewOwner= async(req, res, next)=>{
+  let { id, reviewId } = req.params;
+    let re=await Review.findById(reviewId);
+    if(!res.locals.currUser._id.equals(re.author._id))
+    {
+      req.flash("error", "You are not allowed to access this")
+      return res.redirect(`/listings/${id}`);
+    }
+    next();
+}
+module.exports = { isValid, saveRedirectUrl, isOwner, isReviewOwner };

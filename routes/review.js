@@ -6,6 +6,7 @@ const review = require(`../models/review.js`);  ///requiring the review models f
 const wrapAsync = require(`../utils/wrapAsync.js`); //to handle custom errors...
 const ExpressError = require(`../utils/ExpressError.js`); //to handle custom errors...
 const Listing = require("../models/listing"); // Database models
+const {isValid, isReviewOwner}= require("../middlewares.js")  //To check user is Logged In and review is 
 
 
 
@@ -21,11 +22,11 @@ const validateReview = (req, res, next) => {
 
 
 //reviewss
-router.post('/', validateReview, wrapAsync(async (req, res) => {
+router.post('/', isValid, validateReview, wrapAsync(async (req, res) => {
     let listing = await Listing.findById(req.params.id);
-    console.log(req.body.review);
+    // console.log(req.body.review);
     let newReview = new review(req.body.review);
-
+    newReview.author= req.user._id;
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();
@@ -36,7 +37,7 @@ router.post('/', validateReview, wrapAsync(async (req, res) => {
 
 }));
 
-router.delete('/:reviewId', wrapAsync(async (req, res) => {
+router.delete('/:reviewId', isReviewOwner, wrapAsync(async (req, res) => {
     let { id, reviewId } = req.params;
     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await review.findByIdAndDelete(reviewId);
