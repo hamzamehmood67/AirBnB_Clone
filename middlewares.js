@@ -1,6 +1,7 @@
 
 const Listing= require("./models/listing")
 const Review= require("./models/review")
+const { reviewSchema } = require(`./schema.js`); ///to validate data by joi 
 const isValid = (req, res, next) => {
   if (req.isAuthenticated()) return next();
   else {
@@ -42,4 +43,13 @@ const isReviewOwner= async(req, res, next)=>{
     }
     next();
 }
-module.exports = { isValid, saveRedirectUrl, isOwner, isReviewOwner };
+
+const validateReview = (req, res, next) => {
+  let { error } = reviewSchema.validate(req.body);
+  console.log(error);
+  if (error)
+      throw new ExpressError(400, error);
+  else
+      return next();
+}
+module.exports = { isValid, saveRedirectUrl, isOwner, isReviewOwner, validateReview };
