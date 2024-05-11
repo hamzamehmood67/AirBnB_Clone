@@ -7,22 +7,21 @@ const router = express.Router();
 
 const userController= require("../controller/user.js");
 
-router.get(`/signup`,userController.showSignUpForm );
-router.get(`/login`, userController.showLoginForm);
-
-router.post(
-  `/signup`,
-  wrapAsync(userController.addUser)
-);
-
-router.post(
-  `/login`,
+router.route('/login')
+.get( userController.showLoginForm)
+.post(
   saveRedirectUrl,
   passport.authenticate(`local`, {
     failureRedirect: "/login",
     failureFlash: true,
   }),
   wrapAsync(userController.loginUser)
+)
+
+router.route('singup')
+.get(userController.showSignUpForm )
+.post(
+  wrapAsync(userController.addUser)
 );
 
 router.get(`/logout`, userController.logout);
